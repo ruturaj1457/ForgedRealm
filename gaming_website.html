@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORGED REALM — Dark Fantasy Realms</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0d0d0d;
+  --bg2: #1a1a1a;
+  --bg3: #141414;
+  --accent-cyan: #22d3ee;
+  --accent-purple: #7c3aed;
+  --accent-purple-soft: #a855f7;
+  --text: #e8eaf6;
+  --text-muted: #a1a8b6;
+  --border: rgba(124,58,237,0.16);
+  --card-bg: rgba(26,26,26,0.86);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Exo 2', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  padding: 1.2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(6,8,18,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--accent-cyan);
+}
+.nav-logo span { color: var(--accent-purple); }
+
+.nav-links {
+  display: flex;
+  gap: 1.6rem;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--accent-purple);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.nav-cta {
+  background: var(--accent-purple);
+  border: 1px solid rgba(124,58,237,0.35);
+  color: var(--bg) !important;
+  padding: 0.65rem 1.5rem;
+  border-radius: 6px;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.15em !important;
+  transition: background 0.25s ease, box-shadow 0.25s ease !important;
+  box-shadow: 0 10px 22px rgba(124,58,237,0.16);
+}
+.nav-cta:hover {
+  background: rgba(124,58,237,0.95) !important;
+  box-shadow: 0 14px 28px rgba(124,58,237,0.22) !important;
+}
+.nav-cta::after { display: none !important; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 7.2rem 3rem 3.5rem;
+  overflow: hidden;
+}
+
+/* Simplified hero background */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 25% 25%, rgba(124,58,237,0.2), transparent 28%);
+  z-index: 0;
+}
+
+/* Main hero glow */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+}
+.orb-1 { width: 520px; height: 520px; background: rgba(124,58,237,0.2); top: -6%; right: 8%; }
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid rgba(34,211,238,0.18);
+  background: rgba(34,211,238,0.06);
+  padding: 0.45rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1.6rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+}
+.badge-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 6px rgba(34,211,238,0.25);
+  animation: blink 1.6s ease-in-out infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.hero-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 5.8rem;
+  font-weight: 900;
+  line-height: 1.02;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.hero-title .line1 { color: var(--text); }
+.hero-title .line2 {
+  color: var(--accent-cyan);
+  position: relative;
+}
+.hero-title .line3 { color: var(--accent-purple); }
+
+.hero-sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 2.4rem;
+  font-weight: 300;
+  max-width: 520px;
+
+}
+
+.hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+
+.btn-primary {
+  background: var(--accent-purple);
+  color: var(--bg);
+  padding: 0.95rem 2.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  transition: box-shadow 0.25s ease, transform 0.2s ease, background 0.25s ease;
+  box-shadow: 0 12px 26px rgba(124,58,237,0.16);
+}
+.btn-primary:hover {
+  box-shadow: 0 16px 32px rgba(124,58,237,0.22);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  border: 1.5px solid rgba(34,211,238,0.35);
+  color: var(--accent-cyan);
+  padding: 0.95rem 2.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  background: rgba(34,211,238,0.04);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-secondary:hover {
+  background: rgba(34,211,238,0.12);
+  box-shadow: 0 0 16px rgba(34,211,238,0.14);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.hero-stat .num {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 20px rgba(34,211,238,0.4);
+}
+.hero-stat .label { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.08em; margin-top: 0.2rem; text-transform: uppercase; }
+
+/* HERO RIGHT — game scene */
+.hero-scene {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 50%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.game-screen {
+  width: 420px;
+  height: 520px;
+  border: 1px solid rgba(34,211,238,0.2);
+  border-radius: 16px;
+  background: var(--bg2);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(34,211,238,0.08), inset 0 0 60px rgba(0,0,0,0.4);
+}
+
+.game-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(34,211,238,0.03) 0%, transparent 60%);
+  z-index: 1;
+}
+
+.game-hud {
+  position: absolute;
+  top: 20px; left: 20px; right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 3;
+}
+.hud-score {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem;
+  color: var(--accent-cyan);
+  letter-spacing: 0.1em;
+}
+.hud-health {
+  display: flex;
+  gap: 4px;
+}
+.hp-bar {
+  width: 18px; height: 6px;
+  border-radius: 2px;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 6px var(--accent-cyan);
+}
+.hp-bar.empty { background: rgba(255,255,255,0.1); box-shadow: none; }
+
+/* Animated game world */
+.game-world {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+.game-platform {
+  position: absolute;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--purple), var(--purple-light));
+  box-shadow: 0 0 16px rgba(124,58,237,0.6);
+}
+
+.game-character {
+  position: absolute;
+  width: 28px;
+  height: 40px;
+  bottom: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: charFloat 2s ease-in-out infinite;
+}
+
+@keyframes charFloat { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-12px); } }
+
+.char-body {
+  width: 20px; height: 24px;
+  background: var(--accent-cyan);
+  border-radius: 6px 6px 3px 3px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 0 16px rgba(34,211,238,0.6);
+}
+.char-body::before {
+  content: '';
+  position: absolute;
+  top: 5px; left: 3px; right: 3px; height: 6px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 2px;
+}
+.char-legs {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 2px;
+}
+.char-leg {
+  width: 6px; height: 14px;
+  background: var(--purple-light);
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(168,85,247,0.5);
+  animation: legAlt 0.5s ease-in-out infinite alternate;
+}
+.char-leg:nth-child(2) { animation-direction: alternate-reverse; }
+@keyframes legAlt { from { transform: skewX(-10deg); } to { transform: skewX(10deg); } }
+
+.coin {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  box-shadow: 0 0 10px rgba(124,58,237,0.7);
+  animation: coinBounce 1.5s ease-in-out infinite;
+}
+@keyframes coinBounce { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(0.95); } }
+
+.score-popup {
+  position: absolute;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.9rem;
+  color: var(--accent-purple);
+  text-shadow: 0 0 10px rgba(124,58,237,0.8);
+  animation: popUp 2s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes popUp { 0% { opacity: 1; transform: translateY(0); } 80% { opacity: 0.6; } 100% { opacity: 0; transform: translateY(-40px); } }
+
+.game-screen-glow {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+  
+}
+
+
+/* MARQUEE */
+.ticker {
+  background: var(--accent-cyan);
+  padding: 0.7rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-inner {
+  display: inline-block;
+  animation: tickerScroll 18s linear infinite;
+}
+.ticker-inner span {
+  color: var(--bg);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 2.5rem;
+  font-family: 'Orbitron', monospace;
+}
+@keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* SHARED SECTION */
+section { padding: 6rem 3rem; }
+
+.section-eyebrow {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+/* GAMES GRID */
+.games { background: var(--bg2); }
+
+.games-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+}
+.view-all {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  font-family: 'Orbitron', monospace;
+  border-bottom: 1px solid rgba(34,211,238,0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+.view-all:hover { border-color: var(--accent-cyan); }
+
+.genre-filters {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+.genre-btn {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+}
+.genre-btn.active, .genre-btn:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  background: rgba(34,211,238,0.06);
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.game-card {
+  position: relative;
+  background: linear-gradient(180deg, var(--bg3) 0%, #141414 100%);
+  border: 1px solid rgba(124,58,237,0.16);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.game-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(124,58,237,0.08), transparent 40%);
+  pointer-events: none;
+}
+.game-card:hover {
+  transform: scale(1.05);
+  border-color: rgba(124,58,237,0.45);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35), 0 0 14px rgba(124,58,237,0.16);
+}
+
+.game-thumb {
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-size: 4rem;
+}
+.game-card:nth-child(1) .game-thumb { background: linear-gradient(135deg, #120026 0%, #200043 60%, #2f0a5a 100%); }
+.game-card:nth-child(2) .game-thumb { background: linear-gradient(135deg, #091a14 0%, #104d58 60%, #0d4f5d 100%); }
+.game-card:nth-child(3) .game-thumb { background: linear-gradient(135deg, #210019 0%, #43005a 60%, #510066 100%); }
+.game-card:nth-child(4) .game-thumb { background: linear-gradient(135deg, #13100d 0%, #20120f 60%, #2d1c1e 100%); }
+.game-card:nth-child(5) .game-thumb { background: linear-gradient(135deg, #0a1120 0%, #10243f 60%, #14325d 100%); }
+.game-card:nth-child(6) .game-thumb { background: linear-gradient(135deg, #180023 0%, #2a0062 60%, #320078 100%); }
+
+.game-thumb-icon { position: relative; z-index: 1; filter: drop-shadow(0 0 10px rgba(255,255,255,0.12)); }
+
+.thumb-tag {
+  position: absolute;
+  top: 12px; left: 12px;
+  font-size: 0.65rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.tag-hot { background: var(--accent-purple); color: white; box-shadow: 0 0 10px rgba(124,58,237,0.25); }
+.tag-new { background: rgba(34,211,238,0.14); color: var(--accent-cyan); box-shadow: 0 0 10px rgba(34,211,238,0.2); }
+.tag-free { background: rgba(124,58,237,0.12); color: var(--accent-purple); box-shadow: 0 0 10px rgba(124,58,237,0.16); }
+
+.game-body { padding: 1.4rem 1.6rem 1.6rem; }
+.game-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.55rem;
+  letter-spacing: 0.02em;
+}
+.game-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.game-genre { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.game-players { font-size: 0.78rem; color: var(--accent-cyan); }
+.game-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-top: 0.8rem; }
+
+/* FEATURES */
+.features { background: var(--bg); }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.feat-card {
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card-bg);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.feat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--feat-color, var(--accent-cyan)), transparent);
+}
+.feat-card:hover { border-color: rgba(34,211,238,0.3); }
+
+.feat-card:nth-child(1) { --feat-color: var(--accent-cyan); }
+.feat-card:nth-child(2) { --feat-color: var(--accent-purple); }
+.feat-card:nth-child(3) { --feat-color: var(--accent-cyan); }
+.feat-card:nth-child(4) { --feat-color: var(--accent-purple); }
+
+.feat-icon {
+  font-size: 2.2rem;
+  margin-bottom: 1.2rem;
+}
+.feat-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  color: var(--text);
+}
+.feat-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+/* Dragon's Hall */
+.dragons-hall-section { background: var(--bg2); }
+
+.lb-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 4rem;
+  align-items: start;
+  margin-top: 3rem;
+}
+
+.lb-table {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.lb-header-row {
+  display: grid;
+  grid-template-columns: 40px 1fr auto auto;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: 'Orbitron', monospace;
+}
+
+.lb-row {
+  display: grid;
+  grid-template-columns: 40px 1fr auto auto;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  align-items: center;
+  transition: background 0.15s;
+}
+.lb-row:hover { background: rgba(34,211,238,0.03); }
+.lb-row:last-child { border-bottom: none; }
+
+.lb-rank {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.rank-1 { color: var(--accent-purple); text-shadow: 0 0 10px rgba(124,58,237,0.5); }
+.rank-2 { color: #c0c0c0; }
+.rank-3 { color: #cd7f32; }
+.rank-other { color: var(--text-muted); }
+
+.lb-player { display: flex; align-items: center; gap: 0.8rem; }
+.player-avatar {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: 'Orbitron', monospace;
+}
+.av-1 { background: rgba(34,211,238,0.15); color: var(--accent-cyan); border: 1px solid rgba(34,211,238,0.3); }
+.av-2 { background: rgba(124,58,237,0.15); color: var(--accent-purple); border: 1px solid rgba(124,58,237,0.3); }
+.av-3 { background: rgba(34,211,238,0.15); color: var(--accent-cyan); border: 1px solid rgba(34,211,238,0.3); }
+.av-4 { background: rgba(168,85,247,0.15); color: var(--purple-light); border: 1px solid rgba(168,85,247,0.3); }
+.av-5 { background: rgba(124,58,237,0.15); color: var(--accent-purple); border: 1px solid rgba(124,58,237,0.3); }
+
+.player-name { font-size: 0.88rem; color: var(--text); font-weight: 500; }
+.player-badge { font-size: 0.65rem; color: var(--text-muted); }
+.lb-score { font-family: 'Orbitron', monospace; font-size: 0.85rem; color: var(--accent-cyan); }
+.lb-change { font-size: 0.75rem; }
+.up { color: var(--accent-cyan); }
+.down { color: var(--accent-purple); }
+
+.lb-info .section-eyebrow { margin-bottom: 0.8rem; }
+.lb-info .section-title { margin-bottom: 1rem; }
+.lb-info p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 2rem; }
+
+.prize-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.prize-card {
+  padding: 1.2rem;
+  border-radius: 10px;
+  text-align: center;
+}
+.prize-card:nth-child(1) { background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2); }
+.prize-card:nth-child(2) { background: rgba(192,192,192,0.06); border: 1px solid rgba(192,192,192,0.15); }
+.prize-card:nth-child(3) { background: rgba(205,127,50,0.06); border: 1px solid rgba(205,127,50,0.15); }
+.prize-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+.prize-pos { font-family: 'Orbitron', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.2rem; text-transform: uppercase; }
+.prize-val { font-family: 'Orbitron', monospace; font-size: 0.9rem; font-weight: 700; }
+.prize-card:nth-child(1) .prize-val { color: var(--accent-purple); }
+.prize-card:nth-child(2) .prize-val { color: #c0c0c0; }
+.prize-card:nth-child(3) .prize-val { color: #cd7f32; }
+
+/* PLANS */
+.plans { background: var(--bg); text-align: center; }
+.plans .section-title { margin-bottom: 0.5rem; }
+.plans > p { color: var(--text-muted); margin-bottom: 3rem; font-size: 0.95rem; }
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.plan-card {
+  padding: 2rem 1.8rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.plan-card:hover { transform: translateY(-4px); }
+
+.plan-card.featured {
+  border-color: var(--accent-cyan);
+  background: rgba(34,211,238,0.04);
+  box-shadow: 0 0 40px rgba(34,211,238,0.08);
+}
+.plan-card.featured::before {
+  content: 'MOST POPULAR';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  background: var(--accent-cyan);
+  color: var(--bg);
+  text-align: center;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  padding: 0.35rem;
+  font-weight: 700;
+}
+.plan-card.featured { padding-top: 3rem; }
+
+.plan-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.plan-price {
+  font-family: 'Orbitron', monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+.plan-price span { font-size: 1rem; color: var(--text-muted); }
+.plan-period { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.8rem; }
+
+.plan-features { list-style: none; margin-bottom: 2rem; }
+.plan-features li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}
+.plan-features li::before {
+  content: '▸';
+  color: var(--accent-cyan);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+.plan-features li.included { color: var(--text); }
+
+.btn-plan {
+  display: block;
+  width: 100%;
+  padding: 0.85rem;
+  text-align: center;
+  border-radius: 4px;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+.btn-plan-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.btn-plan-ghost:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+.btn-plan-primary {
+  background: var(--accent-cyan);
+  color: var(--bg);
+  box-shadow: 0 0 20px rgba(34,211,238,0.3);
+}
+.btn-plan-primary:hover { box-shadow: 0 0 35px rgba(34,211,238,0.5); }
+
+/* TESTIMONIALS */
+.reviews { background: var(--bg2); }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.review-card {
+  padding: 1.8rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  transition: border-color 0.2s;
+}
+.review-card:hover { border-color: rgba(34,211,238,0.25); }
+
+.review-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+.reviewer { display: flex; align-items: center; gap: 0.8rem; }
+.rev-avatar {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.rev-name { font-size: 0.9rem; font-weight: 500; }
+.rev-tag { font-size: 0.7rem; color: var(--text-muted); margin-top: 1px; }
+.rev-stars { color: var(--accent-purple); font-size: 0.8rem; letter-spacing: 2px; }
+.review-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-style: italic;
+}
+
+/* CTA BANNER */
+.cta-banner {
+  background: var(--bg);
+  padding: 5rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(34,211,238,0.12) 0%, transparent 50%);
+}
+.cta-banner .section-title { position: relative; z-index: 1; font-size: 3rem; margin-bottom: 1rem; }
+.cta-banner p { position: relative; z-index: 1; color: var(--text-muted); font-size: 1rem; margin-bottom: 2.5rem; }
+.cta-banner .hero-actions { justify-content: center; position: relative; z-index: 1; }
+
+/* FOOTER */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 4rem 3rem 2rem;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer-brand p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.7; margin-top: 1rem; max-width: 250px; }
+
+.footer-col h4 {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 1.2rem;
+}
+.footer-col a {
+  display: block;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin-bottom: 0.7rem;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--text); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-bottom p { color: var(--text-muted); font-size: 0.78rem; }
+
+.social-row { display: flex; gap: 0.8rem; }
+.social-icon {
+  width: 34px; height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-family: 'Orbitron', monospace;
+  transition: border-color 0.2s, color 0.2s;
+}
+.social-icon:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { padding: 6rem 1.5rem 4rem; }
+  .hero-scene { display: none; }
+  .hero-title { font-size: 2.8rem; }
+  section { padding: 4rem 1.5rem; }
+  .games-grid { grid-template-columns: 1fr 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+  .lb-layout { grid-template-columns: 1fr; }
+  .plans-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+  .prize-cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">FORGED <span>REALM</span></div>
+  <ul class="nav-links">
+    <li><a href="#games">Games</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#dragons-hall">Dragon's Hall</a></li>
+    <li><a href="#plans">Choose Your Path</a></li>
+    <li><a href="#plans" class="nav-cta">Play Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      142,000 warriors online right now
+    </div>
+    <h1 class="hero-title">
+      <div class="line1">ENTER THE</div>
+      <div class="line2">FORGED</div>
+      <div class="line3">REALM</div>
+    </h1>
+    <p class="hero-sub">A shadowed realm of legendary quests, guild clashes, and ancient arenas. One path leads beyond the gate.</p>
+    <div class="hero-actions">
+      <a href="#plans" class="btn-primary">Begin Your Quest</a>
+      <a href="#games" class="btn-secondary">Explore the Realms</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">50M+</div>
+        <div class="label">Warriors Online</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">200+</div>
+        <div class="label">Realms Open</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">₹2Cr</div>
+        <div class="label">Treasure Pool Monthly</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animated Game Screen -->
+  <div class="hero-scene">
+    <div class="game-screen">
+      <!-- Starfield -->
+      <div class="game-world" id="gameWorld"></div>
+
+      <div class="game-hud">
+        <div class="hud-score">SCORE: 48,320</div>
+        <div class="hud-health">
+          <div class="hp-bar"></div>
+          <div class="hp-bar"></div>
+          <div class="hp-bar"></div>
+          <div class="hp-bar empty"></div>
+          <div class="hp-bar empty"></div>
+        </div>
+      </div>
+
+      <!-- Platform 1 -->
+      <div class="game-platform" style="width:140px; bottom:140px; left:40px;"></div>
+      <!-- Platform 2 -->
+      <div class="game-platform" style="width:100px; bottom:220px; left:200px;"></div>
+      <!-- Platform 3 -->
+      <div class="game-platform" style="width:120px; bottom:100px; right:20px;"></div>
+
+      <!-- Character -->
+      <div class="game-character">
+        <div class="char-body"></div>
+        <div class="char-legs">
+          <div class="char-leg"></div>
+          <div class="char-leg"></div>
+        </div>
+      </div>
+
+      <!-- Coins -->
+      <div class="coin" style="bottom:260px; left:220px; animation-delay:0.3s;"></div>
+      <div class="coin" style="bottom:268px; left:248px; animation-delay:0.7s;"></div>
+      <div class="coin" style="bottom:276px; left:276px; animation-delay:0.1s;"></div>
+
+      <!-- Score popup -->
+      <div class="score-popup" style="bottom:300px; left:220px;">+100</div>
+
+      
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Battle Royale</span><span>⬡</span>
+    <span>RPG Worlds</span><span>⬡</span>
+    <span>Live Tournaments</span><span>⬡</span>
+    <span>Puzzle Realms</span><span>⬡</span>
+    <span>Team Battles</span><span>⬡</span>
+    <span>Daily Rewards</span><span>⬡</span>
+    <span>Global Rankings</span><span>⬡</span>
+    <span>Battle Royale</span><span>⬡</span>
+    <span>RPG Worlds</span><span>⬡</span>
+    <span>Live Tournaments</span><span>⬡</span>
+    <span>Puzzle Realms</span><span>⬡</span>
+    <span>Team Battles</span><span>⬡</span>
+    <span>Daily Rewards</span><span>⬡</span>
+    <span>Global Rankings</span><span>⬡</span>
+  </div>
+</div>
+
+<!-- GAMES -->
+<section class="games" id="games">
+  <div class="games-header">
+    <div>
+      <p class="section-eyebrow">Armory</p>
+      <h2 class="section-title">Choose Your <span style="color:var(--accent-cyan)">Arena</span></h2>
+    </div>
+    <a href="#" class="view-all">View All 200+ Games →</a>
+  </div>
+
+  <div class="genre-filters">
+    <button class="genre-btn active">All</button>
+    <button class="genre-btn">Battle Royale</button>
+    <button class="genre-btn">RPG</button>
+    <button class="genre-btn">Puzzle</button>
+    <button class="genre-btn">Racing</button>
+    <button class="genre-btn">Strategy</button>
+  </div>
+
+  <div class="games-grid">
+    <div class="game-card">
+      <div class="game-thumb">
+        <div class="thumb-tag tag-hot">🔥 Hot</div>
+        <span class="game-thumb-icon">⚔️</span>
+      </div>
+      <div class="game-body">
+        <div class="game-name">SHADOW STRIKE</div>
+        <div class="game-desc">100 champion warriors clash in a war-torn wasteland. Last guild standing claims the throne.</div>
+
+    <div class="game-card">
+      <div class="game-thumb">
+        <div class="thumb-tag tag-new">✦ New</div>
+        <span class="game-thumb-icon">🧙</span>
+      </div>
+      <div class="game-body">
+        <div class="game-name">AETHER QUEST</div>
+        <div class="game-desc">Massively multiplayer RPG with a living world, dynamic quests, and rival guild campaigns.</div>
+        <div class="game-meta">
+          <span class="game-genre">RPG</span>
+          <span class="game-players">🟢 31,500 playing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-thumb">
+        <div class="thumb-tag tag-free">Free</div>
+        <span class="game-thumb-icon">🐉</span>
+      </div>
+      <div class="game-body">
+        <div class="game-name">DRAGON RUSH</div>
+        <div class="game-desc">Take the skies in fast-paced dragon racing across floating citadels and storm-lashed passes.</div>
+        <div class="game-meta">
+          <span class="game-genre">Racing</span>
+          <span class="game-players">🟢 22,100 playing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-thumb">
+        <div class="thumb-tag tag-hot">🔥 Hot</div>
+        <span class="game-thumb-icon">🧩</span>
+      </div>
+      <div class="game-body">
+        <div class="game-name">ARCANE CIPHER</div>
+        <div class="game-desc">Competitive rune battles — decode ancient sigils faster than your rivals to seize the arcane throne.</div>
+        <div class="game-meta">
+          <span class="game-genre">Puzzle</span>
+          <span class="game-players">🟢 18,700 playing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-thumb">
+        <div class="thumb-tag tag-new">✦ New</div>
+        <span class="game-thumb-icon">🛡️</span>
+      </div>
+      <div class="game-body">
+        <div class="game-name">SIEGE WARS</div>
+        <div class="game-desc">Command siege engines and clans across vast battlefields in strategic conquest mode.</div>
+        <div class="game-meta">
+          <span class="game-genre">Strategy</span>
+          <span class="game-players">🟢 41,800 playing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-thumb">
+        <div class="thumb-tag tag-free">Free</div>
+        <span class="game-thumb-icon">🎯</span>
+      </div>
+      <div class="game-body">
+        <div class="game-name">SPELLSTONE ARENA</div>
+        <div class="game-desc">Arcane duels in the enchanted arena. Cast, dodge, and outsmart your opponent across ranked seasons.</div>
+        <div class="game-meta">
+          <span class="game-genre">Shooter</span>
+          <span class="game-players">🟢 27,300 playing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <p class="section-eyebrow">Forge Powers</p>
+  <h2 class="section-title">Built for <span style="color:var(--accent-purple)">Serious Gamers</span></h2>
+
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">⚡</div>
+      <div class="feat-title">Ultra-Low Latency</div>
+      <div class="feat-desc">Our distributed server network delivers sub-20ms ping across India, Southeast Asia, and Europe. Lag is not in our vocabulary.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🏆</div>
+      <div class="feat-title">Live Tournaments</div>
+      <div class="feat-desc">Weekly and monthly tournaments with real prize pools. Qualify, compete, and climb your way to the Grand Forged Tournament.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎮</div>
+      <div class="feat-title">Cross-Platform Play</div>
+      <div class="feat-desc">Play on PC, mobile, or tablet with seamless cross-device progress. Your account, your stats, everywhere you go.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🤝</div>
+      <div class="feat-title">Squad Up</div>
+      <div class="feat-desc">Built-in voice chat, party finder, and clan system. Find your squad, strategize, and dominate together in every game mode.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Dragon's Hall -->
+<section class="dragons-hall-section" id="dragons-hall">
+  <div class="lb-layout">
+    <div>
+      <p class="section-eyebrow">Dragon's Hall</p>
+      <h2 class="section-title">Global <span style="color:var(--accent-purple)">Dragon's Hall</span></h2>
+
+      <div class="lb-table">
+        <div class="lb-header-row">
+          <span>#</span>
+          <span>Player</span>
+          <span>Score</span>
+          <span>±</span>
+        </div>
+        <div class="lb-row">
+          <span class="lb-rank rank-1">01</span>
+          <div class="lb-player"><div class="player-avatar av-1">XR</div><div><div class="player-name">xR3aper</div><div class="player-badge">⚡ Pro</div></div></div>
+          <span class="lb-score">2,841,200</span>
+          <span class="lb-change up">▲ 12</span>
+        </div>
+        <div class="lb-row">
+          <span class="lb-rank rank-2">02</span>
+          <div class="lb-player"><div class="player-avatar av-2">NS</div><div><div class="player-name">StormSerpent</div><div class="player-badge">🔥 Elite</div></div></div>
+          <span class="lb-score">2,790,500</span>
+          <span class="lb-change down">▼ 3</span>
+        </div>
+        <div class="lb-row">
+          <span class="lb-rank rank-3">03</span>
+          <div class="lb-player"><div class="player-avatar av-3">VX</div><div><div class="player-name">VoidX</div><div class="player-badge">⚡ Pro</div></div></div>
+          <span class="lb-score">2,644,100</span>
+          <span class="lb-change up">▲ 5</span>
+        </div>
+        <div class="lb-row">
+          <span class="lb-rank rank-other">04</span>
+          <div class="lb-player"><div class="player-avatar av-4">GW</div><div><div class="player-name">GhostWolf</div><div class="player-badge">🎯 Ranked</div></div></div>
+          <span class="lb-score">2,512,800</span>
+          <span class="lb-change up">▲ 8</span>
+        </div>
+        <div class="lb-row">
+          <span class="lb-rank rank-other">05</span>
+          <div class="lb-player"><div class="player-avatar av-5">KZ</div><div><div class="player-name">KryptoZen</div><div class="player-badge">🔥 Elite</div></div></div>
+          <span class="lb-score">2,480,300</span>
+          <span class="lb-change down">▼ 1</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lb-info">
+      <p class="section-eyebrow">Monthly Tournament</p>
+      <h2 class="section-title">Compete for <span style="color:var(--accent-purple)">₹50 Lakh</span></h2>
+      <p>Every month, the top players across all game modes compete in the Grand Forged Tournament. Registration is free for Pro and Elite members. Fight your way up the ladder and claim your share of the prize pool.</p>
+
+      <div class="prize-cards">
+        <div class="prize-card">
+          <div class="prize-icon">🥇</div>
+          <div class="prize-pos">1st Place</div>
+          <div class="prize-val">₹20L</div>
+        </div>
+        <div class="prize-card">
+          <div class="prize-icon">🥈</div>
+          <div class="prize-pos">2nd Place</div>
+          <div class="prize-val">₹12L</div>
+        </div>
+        <div class="prize-card">
+          <div class="prize-icon">🥉</div>
+          <div class="prize-pos">3rd Place</div>
+          <div class="prize-val">₹7L</div>
+        </div>
+      </div>
+
+      <a href="#plans" class="btn-primary" style="display:inline-block; margin-top:2rem;">Register Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section class="plans" id="plans">
+  <p class="section-eyebrow">Choose Your Path</p>
+  <h2 class="section-title">Pick Your <span style="color:var(--accent-cyan)">Power Level</span></h2>
+  <p>Start free. Upgrade when you're ready to go pro.</p>
+
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">Recruit</div>
+      <div class="plan-price">Free</div>
+      <div class="plan-period">Forever free · No card needed</div>
+      <ul class="plan-features">
+        <li class="included">Access to 30+ free games</li>
+        <li class="included">Public matchmaking</li>
+        <li class="included">Basic Dragon's Hall access</li>
+        <li>Tournament entry (paid)</li>
+        <li>No clan creation</li>
+      </ul>
+      <a href="#" class="btn-plan btn-plan-ghost">Get Started</a>
+    </div>
+
+    <div class="plan-card featured">
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">₹299<span>/mo</span></div>
+      <div class="plan-period">Billed monthly · Cancel anytime</div>
+      <ul class="plan-features">
+        <li class="included">All 200+ games unlocked</li>
+        <li class="included">Priority matchmaking</li>
+        <li class="included">Free tournament entry</li>
+        <li class="included">Clan creation & management</li>
+        <li class="included">Exclusive Pro cosmetics</li>
+      </ul>
+      <a href="#" class="btn-plan btn-plan-primary">Go Pro</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-name">Elite</div>
+      <div class="plan-price">₹699<span>/mo</span></div>
+      <div class="plan-period">Billed monthly · Best value</div>
+      <ul class="plan-features">
+        <li class="included">Everything in Pro</li>
+        <li class="included">Private server hosting</li>
+        <li class="included">Early access to new games</li>
+        <li class="included">Dedicated support</li>
+        <li class="included">Monthly FORGED REALM coin drops</li>
+      </ul>
+      <a href="#" class="btn-plan btn-plan-ghost">Go Elite</a>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <p class="section-eyebrow">Community</p>
+  <h2 class="section-title">Players <span style="color:var(--accent-cyan)">Love FORGED REALM</span></h2>
+
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-top">
+        <div class="reviewer">
+          <div class="rev-avatar av-1">RK</div>
+          <div><div class="rev-name">Rohan K.</div><div class="rev-tag">Pro Member · Mumbai</div></div>
+        </div>
+        <div class="rev-stars">★★★★★</div>
+      </div>
+      <div class="review-text">"The lag is basically non-existent on Indian servers. I've tried every platform — FORGED REALM is genuinely a different level. The tournament system is addictive."</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="reviewer">
+          <div class="rev-avatar av-3">PS</div>
+          <div><div class="rev-name">Priya S.</div><div class="rev-tag">Elite Member · Bangalore</div></div>
+        </div>
+        <div class="rev-stars">★★★★★</div>
+      </div>
+      <div class="review-text">"I wasn't a big gamer but Cube Cipher pulled me in. Now I'm ranked top 500 globally. The mobile version works flawlessly too — I play on my commute."</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="reviewer">
+          <div class="rev-avatar av-2">AM</div>
+          <div><div class="rev-name">Arjun M.</div><div class="rev-tag">Pro Member · Delhi</div></div>
+        </div>
+        <div class="rev-stars">★★★★★</div>
+      </div>
+      <div class="review-text">"Won ₹40,000 in last month's tournament. The squad feature found me teammates who actually communicate. This platform changed how I think about online gaming."</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <h2 class="section-title">Ready to <span style="color:var(--accent-cyan)">Enter</span> the <span style="color:var(--accent-purple)">Forged Realm?</span></h2>
+  <p>50 million players can't be wrong. Join free — upgrade when you're hooked.</p>
+  <div class="hero-actions">
+    <a href="#" class="btn-primary">Create Free Account</a>
+    <a href="#games" class="btn-secondary">Browse Games First</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo" style="font-size:1.4rem;">FORGED <span style="color:var(--accent-purple)">REALM</span></div>
+      <p>The ultimate online gaming universe. Play, compete, and connect with 50M+ players worldwide.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Games</h4>
+      <a href="#">Battle Royale</a>
+      <a href="#">RPG & Adventure</a>
+      <a href="#">Puzzle & Strategy</a>
+      <a href="#">Racing</a>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <a href="#">Tournaments</a>
+      <a href="#">Dragon's Hall</a>
+      <a href="#">Clans</a>
+      <a href="#">Download App</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Press Kit</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 FORGED REALM Gaming Pvt Ltd · Privacy Policy · Terms of Service</p>
+    <div class="social-row">
+      <a class="social-icon" href="#">DC</a>
+      <a class="social-icon" href="#">TW</a>
+      <a class="social-icon" href="#">YT</a>
+      <a class="social-icon" href="#">IG</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Starfield
+  const world = document.getElementById('gameWorld');
+  if (world) {
+    for (let i = 0; i < 60; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.cssText = `left:${Math.random()*100}%; top:${Math.random()*100}%; animation-delay:${Math.random()*3}s; animation-duration:${1.5+Math.random()*2}s; opacity:${Math.random()*0.7+0.1};`;
+      world.appendChild(s);
+    }
+  }
+
+  // Genre filter tabs
+  document.querySelectorAll('.genre-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
+
+
